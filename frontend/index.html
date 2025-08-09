@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Seu condomínio</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fa-solid fa-bars fa-2xl" style="color: #E9F3F9;"></i>
+                <img src="./Assets/logo.png" alt="logo-seu-condominio">
+            </div>           
+            <div class="header-information">
+                <div class="user">
+                    <h3>Rogério</h3>
+                    <button>Sair</button>
+                </div>
+                <div class="select-condominio">
+                    <div class="checkbox"></div>
+                    <div class="option-condominio">
+                        <h3>Bosque do Cerrado</h3>
+                    </div>
+                    <i class="fa-solid fa-caret-down fa-2xl" style="color: #E9F3F9;"></i>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="cadastro-section">
+                <div class="icon-add">
+                    <i class="fa-solid fa-plus fa-xl" style="color: #E9F3F9;"></i>
+                </div>
+                <button class="btn-cadastrar" onclick="toggleCadastro()">
+                    Cadastrar Tarefa
+                </button>
+            </div>
+
+            <div class="accordion-cadastro" id="accordionCadastro">
+                <div class="header-form">
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <h3>Nova Tarefa</h3>
+                </div>
+                <div class="form-cadastro">
+                    <form id="formTarefa">
+                        <div class="form-group">
+                            <label for="nome">Nome da Tarefa:</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="form-dates">
+                            <div class="form-date-labels">
+                                <h3>Inicio</h3>
+                                <h3>Conclusão</h3>
+                            </div>
+                            <div class="input-date">
+                                <div>
+                                    <input type="date" id="dataInicio" name="dataInicio" required>
+                                    <i class="fa-solid fa-calendar-days fa-2xl" style="color: #3E9AD9; padding-left: 4px;"></i>
+                                </div>
+                                <div>
+                                    <input type="date" id="dataConclusao" name="dataConclusao" required>
+                                    <i class="fa-solid fa-calendar-days fa-2xl" style="color: #3E9AD9; padding-left: 4px;"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-custos">
+                            <div class="custo-estimado">
+                                <label for="custoEstimado">Custo Estimado (R$):</label>
+                                <div class="custo-estimado-input">
+                                    <div>
+                                        <i class="fa-solid fa-brazilian-real-sign" style="color: #E9F3F9;"></i>
+                                    </div>
+                                    <div>
+                                        <input type="number" id="custoEstimado" name="custoEstimado" step="0.01" min="0" placeholder="0,00" required>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="custo-status">
+                                <label for="status">Status da Tarefa:</label>
+                                <div class="custo-status-select">
+                                    <select id="status" name="status" required>
+                                        <option value="">Selecione o status</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="em-andamento">Em Andamento</option>
+                                        <option value="pendente">Pendente</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down" style="color: #E9F3F9;"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <div class="button-voltar">
+                                <div class="icon-voltar">
+                                    <i class="fa-solid fa-reply" style="color: #E9F3F9;"></i>
+                                </div>
+                                <button type="button" class="btn-voltar" onclick="toggleCadastro()">Voltar</button>
+                            </div>
+                            <div class="button-excluir" id="btnExcluir" style="display: none;">
+                                <div class="icon-excluir">
+                                    <i class="fa-solid fa-trash-can" style="color: #E9F3F9;"></i>
+                                </div>
+                                <button type="button" class="btn-excluir" onclick="excluirTarefaForm()" style="display: none;">Excluir</button>
+                            </div>
+                            <div class="button-salvar">
+                                <div class="icon-salvar">
+                                    <i class="fa-solid fa-floppy-disk" style="color: #E9F3F9;"></i>
+                                </div>
+                                <button type="submit" class="btn-salvar">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="accordion-confirmacao" id="accordionConfirmacao">
+                <div class="header-confirmacao">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Deseja excluir?</h3>
+                </div>
+                <div class="form-confirmacao">
+                    <div class="confirmacao-buttons">
+                        <div class="button-confirmar-exclusao">
+                            <div class="icon-confirmar-exclusao">
+                                <i class="fas fa-check" style="color: #E9F3F9;"></i>
+                            </div>
+                            <button type="button" class="btn-confirmar-exclusao" onclick="confirmarExclusao()">Sim</button>
+                        </div>
+                        <div class="button-cancelar-confirmacao">
+                            <div class="icon-cancelar-confirmacao">
+                                <i class="fas fa-times" style="color: #E9F3F9;"></i>
+                            </div>
+                            <button type="button" class="btn-cancelar-confirmacao" onclick="fecharConfirmacao()">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarefas-list" id="tarefasList"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
